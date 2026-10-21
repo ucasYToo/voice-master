@@ -5,8 +5,8 @@
     <key>CFBundleName</key><string>Voice Master</string>
     <key>CFBundleDisplayName</key><string>Voice Master</string>
     <key>CFBundleIdentifier</key><string>local.voicemaster.app</string>
-    <key>CFBundleVersion</key><string>1</string>
-    <key>CFBundleShortVersionString</key><string>0.1.0</string>
+    <key>CFBundleVersion</key><string>2</string>
+    <key>CFBundleShortVersionString</key><string>1.0.0</string>
     <key>CFBundleExecutable</key><string>VoiceMaster</string>
     <key>CFBundleIconFile</key><string>AppIcon.icns</string>
     <key>CFBundlePackageType</key><string>APPL</string>

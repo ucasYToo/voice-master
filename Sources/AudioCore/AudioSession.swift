@@ -36,11 +36,11 @@ final class AudioSession: @unchecked Sendable {
             let physicalOutput = try HAL.channelCounts(device, scope: kAudioObjectPropertyScopeOutput)
             let physicalInput = try HAL.channelCounts(device, scope: kAudioObjectPropertyScopeInput)
             guard physicalInput.reduce(0, +) == 0 else {
-                throw AudioFailure(message: "当前默认输出同时含麦克风输入。阶段 A 尚未验证这类设备的流隔离；请切换至内建扬声器或输出专用设备后重试。")
+                throw AudioFailure(message: "当前默认输出同时含麦克风输入，暂不支持。请切换至内建扬声器或输出专用设备后重试。")
             }
             let channels = physicalOutput.reduce(0, +)
             guard channels == 1 || channels == 2 else {
-                throw AudioFailure(message: "阶段 A 暂只支持单声道或立体声输出设备，当前设备有 \(channels) 声道。")
+                throw AudioFailure(message: "暂只支持单声道或立体声输出设备，当前设备有 \(channels) 声道。")
             }
 
             let description = CATapDescription(stereoMixdownOfProcesses: processIDs)
@@ -93,7 +93,7 @@ final class AudioSession: @unchecked Sendable {
             // Refuse ambiguous aggregate layouts instead of accidentally forwarding microphone audio.
             guard inputConfiguration.reduce(0, +) == 2,
                   outputConfiguration.reduce(0, +) == channels else {
-                throw AudioFailure(message: "当前设备无法建立仅包含媒体的两声道输入，已停止。验证版不读取麦克风；请尝试内建扬声器或不含输入的耳机输出。")
+                throw AudioFailure(message: "当前设备无法建立独立的媒体音频通路，已停止。请尝试内建扬声器或输出专用的耳机设备。")
             }
             try HAL.validateFloatStreams(handles.aggregate, scope: kAudioObjectPropertyScopeInput, sampleRate: sampleRate)
             try HAL.validateFloatStreams(handles.aggregate, scope: kAudioObjectPropertyScopeOutput, sampleRate: sampleRate)

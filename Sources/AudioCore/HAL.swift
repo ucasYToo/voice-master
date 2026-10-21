@@ -98,7 +98,7 @@ enum HAL {
                   format.mChannelsPerFrame > 0,
                   format.mBytesPerFrame == 4 * (format.mFormatFlags & kAudioFormatFlagIsNonInterleaved != 0 ? 1 : format.mChannelsPerFrame),
                   abs(format.mSampleRate - sampleRate) < 1 else {
-                throw AudioFailure(message: "当前设备格式暂不支持：验证版要求相同采样率的 Float32 PCM。已保留原始播放路径。")
+                throw AudioFailure(message: "当前设备的音频格式暂不支持，请尝试内建扬声器或其他输出设备。")
             }
         }
     }

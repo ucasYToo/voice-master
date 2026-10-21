@@ -7,6 +7,19 @@ import SwiftUI
 @MainActor
 struct MediaVolumeApplication {
     static func main() {
+        if let argument = CommandLine.arguments.firstIndex(of: "--render-preview") {
+            guard CommandLine.arguments.indices.contains(argument + 1) else {
+                fputs("Usage: VoiceMaster --render-preview <directory>\n", stderr)
+                exit(EXIT_FAILURE)
+            }
+            do {
+                try PanelPreview.render(to: URL(fileURLWithPath: CommandLine.arguments[argument + 1], isDirectory: true))
+            } catch {
+                fputs("UI preview failed: \(error.localizedDescription)\n", stderr)
+                exit(EXIT_FAILURE)
+            }
+            return
+        }
         if CommandLine.arguments.contains("--diagnose") {
             do {
                 print(try AudioDiagnostics.report())
@@ -28,10 +41,12 @@ struct MediaVolumeApplication {
 }
 
 @MainActor
-private final class ApplicationDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
+private final class ApplicationDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation, NSMenuDelegate {
     private let controller = AudioController()
     private var window: NSWindow?
     private var statusItem: NSStatusItem?
+    private var statusSummaryItem: NSMenuItem?
+    private var toggleProcessingItem: NSMenuItem?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         installApplicationIcon()
@@ -70,24 +85,29 @@ private final class ApplicationDelegate: NSObject, NSApplicationDelegate, NSMenu
     }
 
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
-        if menuItem.action == #selector(stopProcessing(_:)) {
-            return controller.isRunning
+        if menuItem.action == #selector(toggleProcessing(_:)) {
+            return !controller.isBusy && (controller.isRunning || controller.selectedApplication != nil)
+        }
+        if menuItem.action == #selector(resetGain(_:)) {
+            return !controller.isBusy && controller.selectedApplication != nil
         }
         return true
     }
 
     private func createWindow() {
         let panel = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 600, height: 690),
+            contentRect: NSRect(x: 0, y: 0, width: 840, height: 650),
             styleMask: [.titled, .closable, .miniaturizable, .resizable],
             backing: .buffered,
             defer: false
         )
-        panel.title = "Voice Master · 音频验证"
-        panel.minSize = NSSize(width: 560, height: 610)
+        panel.title = "Voice Master"
+        panel.titlebarAppearsTransparent = true
+        panel.titleVisibility = .hidden
+        panel.minSize = NSSize(width: 740, height: 608)
         panel.isReleasedWhenClosed = false
-        panel.contentView = NSHostingView(rootView: ValidationPanel(controller: controller))
-        panel.setFrameAutosaveName("VoiceMasterValidationPanel")
+        panel.contentView = NSHostingView(rootView: MainPanel(controller: controller))
+        panel.setFrameAutosaveName("VoiceMasterMainPanel")
         panel.center()
         window = panel
     }
@@ -95,14 +115,28 @@ private final class ApplicationDelegate: NSObject, NSApplicationDelegate, NSMenu
     private func installStatusItem() {
         let item = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         item.button?.image = makeStatusIcon()
-        item.button?.toolTip = "Voice Master · 媒体音量验证"
+        item.button?.toolTip = "Voice Master · 应用独立音量"
         let menu = NSMenu()
-        menu.addItem(makeItem("打开验证面板…", action: #selector(showPanel(_:))))
-        menu.addItem(makeItem("停止处理", action: #selector(stopProcessing(_:))))
+        menu.delegate = self
+        let summary = NSMenuItem(title: "Voice Master", action: nil, keyEquivalent: "")
+        menu.addItem(summary)
+        statusSummaryItem = summary
+        menu.addItem(.separator())
+        menu.addItem(makeItem("打开音量面板…", action: #selector(showPanel(_:))))
+        let toggle = makeItem("开启音量调节", action: #selector(toggleProcessing(_:)))
+        menu.addItem(toggle)
+        toggleProcessingItem = toggle
+        menu.addItem(makeItem("恢复 100%", action: #selector(resetGain(_:))))
         menu.addItem(.separator())
         menu.addItem(makeItem("退出 Voice Master", action: #selector(quit(_:)), key: "q"))
         item.menu = menu
         statusItem = item
+    }
+
+    func menuWillOpen(_ menu: NSMenu) {
+        let name = controller.selectedApplication?.name ?? "未选择应用"
+        statusSummaryItem?.title = "\(name) · \(Int((controller.gain * 100).rounded()))%"
+        toggleProcessingItem?.title = controller.isBusy ? "正在切换…" : controller.isRunning ? "停止调节" : "开启音量调节"
     }
 
     private func installApplicationIcon() {
@@ -143,11 +177,24 @@ private final class ApplicationDelegate: NSObject, NSApplicationDelegate, NSMenu
         let menu = NSMenu()
         let applicationItem = NSMenuItem()
         let applicationMenu = NSMenu()
-        applicationMenu.addItem(makeItem("打开验证面板…", action: #selector(showPanel(_:)), key: "0"))
+        applicationMenu.addItem(makeItem("打开音量面板…", action: #selector(showPanel(_:)), key: "1"))
         applicationMenu.addItem(.separator())
         applicationMenu.addItem(makeItem("退出 Voice Master", action: #selector(quit(_:)), key: "q"))
         applicationItem.submenu = applicationMenu
         menu.addItem(applicationItem)
+        let editItem = NSMenuItem()
+        let editMenu = NSMenu(title: "编辑")
+        for (title, action, key) in [
+            ("撤销", NSSelectorFromString("undo:"), "z"),
+            ("剪切", #selector(NSText.cut(_:)), "x"),
+            ("复制", #selector(NSText.copy(_:)), "c"),
+            ("粘贴", #selector(NSText.paste(_:)), "v"),
+            ("全选", #selector(NSText.selectAll(_:)), "a")
+        ] {
+            editMenu.addItem(NSMenuItem(title: title, action: action, keyEquivalent: key))
+        }
+        editItem.submenu = editMenu
+        menu.addItem(editItem)
         NSApplication.shared.mainMenu = menu
     }
 
@@ -162,8 +209,12 @@ private final class ApplicationDelegate: NSObject, NSApplicationDelegate, NSMenu
         NSApplication.shared.activate(ignoringOtherApps: true)
     }
 
-    @objc private func stopProcessing(_ sender: Any?) {
-        controller.stop()
+    @objc private func toggleProcessing(_ sender: Any?) {
+        if controller.isRunning { controller.stop() } else { controller.start() }
+    }
+
+    @objc private func resetGain(_ sender: Any?) {
+        controller.gain = 1
     }
 
     @objc private func quit(_ sender: Any?) {
