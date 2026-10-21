@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" fill="none" role="img" aria-labelledby="a-title">
+  <title id="a-title">A · 声量跃升</title>
+  <defs>
+    <linearGradient id="a-bg" x1="32" y1="16" x2="221" y2="246" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFB44A"/><stop offset=".48" stop-color="#FF8538"/><stop offset="1" stop-color="#E65C32"/>
+    </linearGradient>
+    <linearGradient id="a-sheen" x1="128" y1="8" x2="128" y2="248" gradientUnits="userSpaceOnUse">
+      <stop stop-color="white" stop-opacity=".38"/><stop offset=".6" stop-color="white" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect x="8" y="8" width="240" height="240" rx="56" fill="url(#a-bg)"/>
+  <rect x="9" y="9" width="238" height="238" rx="55" stroke="url(#a-sheen)" stroke-width="2"/>
+  <g id="glyph">
+    <path d="M57 103H78L105 80C110 76 117 79 117 86V170C117 177 110 180 105 176L78 153H57C50 153 46 149 46 142V114C46 107 50 103 57 103Z" fill="#FFFDF6"/>
+    <path d="M140 106C151 118 151 138 140 150" stroke="#FFFDF6" stroke-width="13" stroke-linecap="round"/>
+    <path d="M186 176V80M165 101L186 80L207 101" stroke="#FFFDF6" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" fill="none" role="img" aria-labelledby="d-title">
+  <title id="d-title">Wave V — voice in a single gesture</title>
+  <defs>
+    <linearGradient id="d-background" x1="32" y1="19" x2="218" y2="245" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#352052"/>
+      <stop offset=".52" stop-color="#201232"/>
+      <stop offset="1" stop-color="#291544"/>
+    </linearGradient>
+    <radialGradient id="d-halo" cx="0" cy="0" r="1" gradientTransform="translate(196 57) rotate(134) scale(199 171)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#9D66ED" stop-opacity=".27"/>
+      <stop offset="1" stop-color="#9D66ED" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="d-wave" x1="78" y1="140" x2="201" y2="109" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset=".4" stop-color="#F6F0FF"/>
+      <stop offset=".72" stop-color="#D4BAFF"/>
+      <stop offset="1" stop-color="#9B6CE8"/>
+    </linearGradient>
+    <clipPath id="d-background-clip">
+      <rect x="8" y="8" width="240" height="240" rx="56"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#d-background-clip)">
+    <rect x="8" y="8" width="240" height="240" rx="56" fill="url(#d-background)"/>
+    <rect x="8" y="8" width="240" height="240" rx="56" fill="url(#d-halo)"/>
+    <rect x="8.75" y="8.75" width="238.5" height="238.5" rx="55.25" stroke="white" stroke-opacity=".1" stroke-width="1.5"/>
+  </g>
+  <g id="glyph">
+    <path d="M58 112 H73 L111 168 Q119 181 126 166 L159 88 Q166 72 173 88 L185 112 H199" stroke="url(#d-wave)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

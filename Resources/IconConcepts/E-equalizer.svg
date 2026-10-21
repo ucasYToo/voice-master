@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" fill="none">
+  <defs>
+    <linearGradient id="e-background" x1="31" y1="20" x2="221" y2="244" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF8A70"/>
+      <stop offset="0.48" stop-color="#F75D7D"/>
+      <stop offset="1" stop-color="#D63182"/>
+    </linearGradient>
+    <radialGradient id="e-glow" cx="0" cy="0" r="1" gradientTransform="translate(64 32) rotate(55) scale(195 175)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFD6AC" stop-opacity="0.36"/>
+      <stop offset="1" stop-color="#FFD6AC" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="e-knob" x1="128" y1="72" x2="128" y2="164" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#FFF2F6"/>
+    </linearGradient>
+    <filter id="e-shadow" x="45" y="62" width="166" height="123" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#9A1755" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+  <rect x="8" y="8" width="240" height="240" rx="56" fill="url(#e-background)"/>
+  <rect x="8" y="8" width="240" height="240" rx="56" fill="url(#e-glow)"/>
+  <rect x="8.75" y="8.75" width="238.5" height="238.5" rx="55.25" stroke="#FFFFFF" stroke-opacity="0.28" stroke-width="1.5"/>
+  <g id="glyph">
+    <path d="M76 68V188M128 68V188M180 68V188" stroke="#9A245D" stroke-opacity="0.24" stroke-width="9" stroke-linecap="round"/>
+    <path d="M76 68V188M128 68V188M180 68V188" stroke="#FFFFFF" stroke-opacity="0.26" stroke-width="5" stroke-linecap="round"/>
+    <path d="M76 119V188M128 85V188M180 151V188" stroke="#FFFFFF" stroke-opacity="0.92" stroke-width="5" stroke-linecap="round"/>
+    <g filter="url(#e-shadow)">
+      <rect x="57" y="109" width="38" height="20" rx="10" fill="url(#e-knob)"/>
+      <rect x="109" y="75" width="38" height="20" rx="10" fill="url(#e-knob)"/>
+      <rect x="161" y="141" width="38" height="20" rx="10" fill="url(#e-knob)"/>
+    </g>
+    <path d="M70 119H82M122 85H134M174 151H186" stroke="#D94C78" stroke-opacity="0.47" stroke-width="2" stroke-linecap="round"/>
+  </g>
+</svg>

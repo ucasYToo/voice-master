@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleName</key><string>Voice Master</string>
+    <key>CFBundleDisplayName</key><string>Voice Master</string>
+    <key>CFBundleIdentifier</key><string>local.voicemaster.app</string>
+    <key>CFBundleVersion</key><string>1</string>
+    <key>CFBundleShortVersionString</key><string>0.1.0</string>
+    <key>CFBundleExecutable</key><string>VoiceMaster</string>
+    <key>CFBundleIconFile</key><string>AppIcon.icns</string>
+    <key>CFBundlePackageType</key><string>APPL</string>
+    <key>LSMinimumSystemVersion</key><string>14.2</string>
+    <key>NSHighResolutionCapable</key><true/>
+    <key>NSAudioCaptureUsageDescription</key><string>捕获你选择的媒体应用音频，在本机实时调整音量并播放。不会保存或上传音频，也不会捕获 FaceTime 通话。</string>
+</dict>
+</plist>

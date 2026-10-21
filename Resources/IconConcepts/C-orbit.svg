@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" fill="none" role="img" aria-labelledby="c-title">
+  <title id="c-title">Orbit — luminous volume dial</title>
+  <defs>
+    <linearGradient id="c-background" x1="33" y1="22" x2="222" y2="239" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#3248A0"/>
+      <stop offset=".5" stop-color="#22275B"/>
+      <stop offset="1" stop-color="#3B195D"/>
+    </linearGradient>
+    <radialGradient id="c-halo" cx="0" cy="0" r="1" gradientTransform="translate(73 52) rotate(45) scale(192 145)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7689FF" stop-opacity=".42"/>
+      <stop offset="1" stop-color="#7689FF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="c-dial" x1="76" y1="79" x2="153" y2="181" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7B8DF6"/>
+      <stop offset=".45" stop-color="#4C58B9"/>
+      <stop offset="1" stop-color="#2E255B"/>
+    </linearGradient>
+    <linearGradient id="c-rim" x1="80" y1="78" x2="148" y2="184" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D5E6FF" stop-opacity=".6"/>
+      <stop offset=".52" stop-color="#A9BDFF" stop-opacity=".08"/>
+      <stop offset="1" stop-color="#111538" stop-opacity=".7"/>
+    </linearGradient>
+    <linearGradient id="c-signal" x1="53" y1="181" x2="210" y2="91" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6992FF"/>
+      <stop offset=".52" stop-color="#54D9FF"/>
+      <stop offset="1" stop-color="#B0FFF8"/>
+    </linearGradient>
+    <clipPath id="c-background-clip">
+      <rect x="8" y="8" width="240" height="240" rx="56"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#c-background-clip)">
+    <rect x="8" y="8" width="240" height="240" rx="56" fill="url(#c-background)"/>
+    <rect x="8" y="8" width="240" height="240" rx="56" fill="url(#c-halo)"/>
+    <rect x="8.75" y="8.75" width="238.5" height="238.5" rx="55.25" stroke="white" stroke-opacity=".12" stroke-width="1.5"/>
+  </g>
+  <g id="glyph">
+    <circle cx="112" cy="132" r="54" fill="#10142F" fill-opacity=".45"/>
+    <circle cx="112" cy="128" r="52" fill="url(#c-dial)"/>
+    <circle cx="112" cy="128" r="51.25" stroke="url(#c-rim)" stroke-width="1.5"/>
+    <path d="M72 177 A64 64 0 1 1 158 83" stroke="#131B48" stroke-width="8" stroke-linecap="round"/>
+    <path d="M72 177 A64 64 0 1 1 158 83" stroke="url(#c-signal)" stroke-width="6" stroke-linecap="round"/>
+    <path d="M125 115 L141 99" stroke="#F4FCFF" stroke-width="9" stroke-linecap="round"/>
+    <circle cx="112" cy="128" r="5" fill="#E2F4FF" fill-opacity=".82"/>
+    <path d="M181 107 C194 119 194 137 181 149" stroke="url(#c-signal)" stroke-width="6" stroke-linecap="round"/>
+    <path d="M195 93 C217 112 217 144 195 163" stroke="url(#c-signal)" stroke-width="6" stroke-linecap="round"/>
+  </g>
+</svg>

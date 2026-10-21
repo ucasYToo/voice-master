@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" fill="none" role="img" aria-labelledby="b-title">
+  <title id="b-title">B · 独立声轨</title>
+  <defs>
+    <linearGradient id="b-bg" x1="24" y1="10" x2="224" y2="248" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#143F40"/><stop offset="1" stop-color="#09272F"/>
+    </linearGradient>
+    <linearGradient id="b-accent" x1="153" y1="73" x2="190" y2="184" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#C0FFE1"/><stop offset="1" stop-color="#42DFAF"/>
+    </linearGradient>
+    <linearGradient id="b-sheen" x1="128" y1="8" x2="128" y2="248" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#B3FFE7" stop-opacity=".3"/><stop offset="1" stop-color="#B3FFE7" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect x="8" y="8" width="240" height="240" rx="56" fill="url(#b-bg)"/>
+  <rect x="9" y="9" width="238" height="238" rx="55" stroke="url(#b-sheen)" stroke-width="2"/>
+  <g id="glyph">
+    <path d="M66 114V142M90 97V159" stroke="#85A7A6" stroke-width="13" stroke-linecap="round"/>
+    <path d="M119 76V180" stroke="#517776" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M149 104V152M175 77V179M201 94V162" stroke="url(#b-accent)" stroke-width="15" stroke-linecap="round"/>
+  </g>
+</svg>
